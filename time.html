@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>What time is it now</title>
+  </head>
+
+  <body>
+    <div id='root'></div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/react/16.1.0/umd/react.development.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.1.0/umd/react-dom.development.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js'></script>
+    <script type='text/babel'>
+    const div_style = {
+      margin: '40px',
+      border: '5px solid teal'
+    };
+
+    const h2Style = {
+      fontSize: '15px',
+      textAlign: 'center'
+    }
+
+
+    function tick() {
+      const element = (
+        <div style = {div_style}>
+          <h2 style = {h2Style}>The current time is {new Date().toLocaleTimeString()}, {new Date().toLocaleDateString()}.</h2>
+        </div>
+      );
+// highlight-next-line
+    ReactDOM.render(element, document.getElementById('root'));
+    }
+
+    setInterval(tick, 1000);
+
+    </script>
+
+
+  </body>
+
+</html>
