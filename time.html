@@ -20,22 +20,57 @@
       textAlign: 'center'
     }
 
-
-    function tick() {
-      const element = (
-        <div style = {div_style}>
-          <h2 style = {h2Style}>The current time is {new Date().toLocaleTimeString()}, {new Date().toLocaleDateString()}.</h2>
-        </div>
-      );
-// highlight-next-line
-    ReactDOM.render(element, document.getElementById('root'));
+    const textStyle ={
+      textAlign: 'center'
     }
 
-    setInterval(tick, 1000);
+    class Tick extends React.Component{
+      constructor(props){
+        super(props);
+        this.state = {
+          module: 'Front-end fundamental',
+          date: new Date()};
+      }
+      //hooks after rendered to DOM
+      componentDidMount() {
+        this.clock = setInterval(
+          () => this.clockUpdate(),
+          1000
+        );
+      }
+
+      //stop the timer
+      componentWillUnmount() {
+        clearInterval(this.clock);
+      }
+
+      //update new state every second
+      clockUpdate(){
+        this.setState({
+          date: new Date()
+        });
+      }
+
+      render(){
+          return(
+           <div style = {div_style}>
+              <h2 style = {h2Style}>{this.state.date.toLocaleTimeString()}, {this.state.date.toLocaleDateString()}.</h2>
+              <h3 style = {textStyle}> Progress on Bloc so far:</h3>
+              <p style = {textStyle}> Working on {this.props.checkpoint} checkpoint under {this.state.module}.</p>
+           </div>
+           );
+         }
+       }
+
+    const info = {
+      checkpoint: 'Props and State'
+    }
+
+    ReactDOM.render(
+      <Tick
+        checkpoint={info.checkpoint}/>, document.getElementById('root')
+    );
 
     </script>
-
-
   </body>
-
 </html>
